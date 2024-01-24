@@ -36,8 +36,7 @@ Proyection_K = pinv(K'*K)*K'; % Computing the proyection matrix to define the al
 %% Decomposing the output.
 
 for i = 1 : reg
-    % preparing the input regressors and the complement matrices to compute
-    % the proyections
+    % preparing the input regressors and the complement matrices to compute the proyections
     input{i} = zeros(N,d);
     input{i}(:,(i-1)*m+1:i*m) = X(:,(i-1)*m+1:i*m);
     comp_input{i} = X;
