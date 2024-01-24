@@ -14,7 +14,7 @@
 % values for N and m in both block-system structures. The goodness of the 
 % fit was evaluated based on the estimations on a test dataset.
 
-%% Clearing enviroment and preparing data
+%% Clearing environment and preparing data
 
 clear
 close all
@@ -167,13 +167,13 @@ for Sim=1:2 % The first simulation evaluate the performance of the Wiener
                 [input_t,output_t] = prepareData(Xn,y_n,m);
                 Xn_prepro = (input_t-MdlGau_T.Mu)./MdlGau_T.Sigma; % Preprocessing the data
                 tic
-                Ypn_proy = NObSP(input_t,XSV,m,MdlGau_T); % Calculate the retreive contributions
+                Ypn_proy = NObSP(input_t,XSV,m,MdlGau_T); % Calculate the retrieve contributions
                 M_Ti_Te(Cont,Contm,Conti_te,1) = toc; % Time of NObSP by projections
                 fprintf('en -> %d\n',M_Ti_Te(Cont,Contm,Conti_te,1))
                 fprintf('Test (Alpha) - ')
                 tic
                 dis_X = diag(Xn_prepro*Xn_prepro')-2*Xn_prepro*XSV'+ones(N-m+1,1)*...
-                    (diag(XSV*XSV'))'; % Computing the euclidean distance for thecoinstructionof the kernel
+                    (diag(XSV*XSV'))'; % Computing the Euclidean distance for the construction of the kernel
                 K = exp(-1*dis_X./MdlGau_T.KernelParameters.Scale); % Calculating the kernel matrix
                 Ypn = K*Alpha; % Estimating the output for the nonlinear contributions of each input regressor
                 M_Ti_Te(Cont,Contm,Conti_te,2) = toc; % Time of NObSP by coefficients
