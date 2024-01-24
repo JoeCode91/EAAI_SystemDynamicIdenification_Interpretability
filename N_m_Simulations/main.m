@@ -82,8 +82,8 @@ for Sim=1:2 % The first simulation evaluate the performance of the Wiener
                     Y2 = C2*filter(b2,a2,P2);
                     N_Tit = 'Hammerstein Structure';
                 end
-                % Compund System
-                Sys = Y1 + Y2;
+                
+                Sys = Y1 + Y2; % Compound System
                 [input,output] = prepareData(X,Sys,m); % Preparing the data for the regression model.
         
                 %% Fitting the model
