@@ -2,7 +2,7 @@
 %% (N) and the order of the model (m) of NObSP using SVM for dynamic 
 %% systems.
 
-% This program evaluate The impact of the model order, m, and the number of
+% This program evaluate the impact of the model order, m, and the number of
 % training samples used to fit the model, N , was evaluated. For each pair 
 % of variable values, the Root Mean Squared Error (RMSE) was computed 
 % between the predicted output of the fitted model and the real output. 
