@@ -146,7 +146,7 @@ for Sim=1:2 % The first simulation evaluate the performance of the Wiener
                     N_Tit = 'Wiener Structure';
                 
                 else
-                    
+                    % Parameters of Hammerstein Structure
                     C1=(2e-4);
                     C2=(.75);
                     
