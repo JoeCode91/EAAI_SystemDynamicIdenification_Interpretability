@@ -32,8 +32,7 @@ Mc2 = eye(n_sv)-ones(n_sv,1)*ones(1,n_sv)/n_sv; % Right centering matrix
 %% Decomposing the output.
 
 for i = 1 : reg
-    % preparing the input regressors and the complement matrices to compute
-    % the proyections
+    % preparing the input regressors and the complement matrices to compute the proyections
     input{i} = zeros(N,d);
     input{i}(:,(i-1)*m+1:i*m) = X(:,(i-1)*m+1:i*m);
     comp_input{i} = X;
@@ -46,15 +45,12 @@ for i = 1 : reg
     % Computing the kernel matrices
 
     K_input{i} = Mc1*exp(-1*dis_input./Mdl.KernelParameters.Scale)*Mc2;
-    K_comp_input{i} = Mc1*exp(-1*dis_comp_input./...
-        Mdl.KernelParameters.Scale)*Mc2;
+    K_comp_input{i} = Mc1*exp(-1*dis_comp_input./Mdl.KernelParameters.Scale)*Mc2;
 
     % Computing the projections
-    P_comp_input = K_comp_input{i}*pinv(K_comp_input{i}'*...
-        K_comp_input{i})*K_comp_input{i}';
+    P_comp_input = K_comp_input{i}*pinv(K_comp_input{i}'*K_comp_input{i})*K_comp_input{i}';
     Q_comp_input = eye(N) - P_comp_input;
-    P{i} = K_input{i}*pinv(K_input{i}'*Q_comp_input*K_input{i})*...
-        K_input{i}'*Q_comp_input;
+    P{i} = K_input{i}*pinv(K_input{i}'*Q_comp_input*K_input{i})*K_input{i}'*Q_comp_input;
 
     % Computing the proyections
     Y(:,i) = P{i}*(out-mean(out));
