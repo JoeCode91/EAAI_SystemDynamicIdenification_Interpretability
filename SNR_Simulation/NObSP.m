@@ -1,12 +1,12 @@
 function Y = NObSP(X,Xsv,m,Mdl)
 
 % Function to decompose the output of a model in the partial contributions
-% given by the input data. The input and oputput of the model are defined
+% given by the input data. The input and output of the model are defined
 % as follows:
 %
 % X: Input to the model, the dimensions are Nx(dxm) where N is the number
-% of observations, d yis the number of input regressors, and m y the number
-% of delays of the model.
+% of observations, d is the number of input regressors, and m y is the number
+% of model delays.
 % Xsv: Support vectors for the model.
 % Mdl: Is th trained Model using SVM.
 % Y: is a matrix of size Nxd, where each column contains the nonlinear
@@ -20,11 +20,11 @@ reg = d/m; % computing the number of regressors
 n_sv = size(Xsv,1); % Computing the size of the support vectors.
 
 input = cell(reg,1); % Initializing a cell structure for the input matrices
-comp_input = cell(reg,1); % Initializing a cell structure for the complement of the input matrices.
+comp_input = cell(reg,1); % Initializing a cell structure for complementing the input matrices.
 K_input = cell(reg,1); % Initializing a cell structure for the kernel matrices of the input
 K_comp_input = cell(reg,1); % Initializing a cell structure for the kernel matrices of the complement of the input
-P = cell(reg,1); % Initializing a cell structure for the proyection matrices
-Y = zeros(N,reg); % Initializng the output nmatrix
+P = cell(reg,1); % Initializing a cell structure for the projection matrices
+Y = zeros(N,reg); % Initializing the output matrix
 
 Mc1 = eye(N)-ones(N,1)*ones(1,N)/N; % Left centering matrix
 Mc2 = eye(n_sv)-ones(n_sv,1)*ones(1,n_sv)/n_sv; % Right centering matrix
@@ -32,7 +32,7 @@ Mc2 = eye(n_sv)-ones(n_sv,1)*ones(1,n_sv)/n_sv; % Right centering matrix
 %% Decomposing the output.
 
 for i = 1 : reg
-    % preparing the input regressors and the complement matrices to compute the proyections
+    % preparing the input regressors and the complement matrices to compute the projection
     input{i} = zeros(N,d);
     input{i}(:,(i-1)*m+1:i*m) = X(:,(i-1)*m+1:i*m);
     comp_input{i} = X;
@@ -43,7 +43,6 @@ for i = 1 : reg
     dis_comp_input = diag(comp_input{i}*comp_input{i}')-2*comp_input{i}*Xsv'+ones(N,1)*(diag(Xsv*Xsv'))';
     
     % Computing the kernel matrices
-
     K_input{i} = Mc1*exp(-1*dis_input./Mdl.KernelParameters.Scale)*Mc2;
     K_comp_input{i} = Mc1*exp(-1*dis_comp_input./Mdl.KernelParameters.Scale)*Mc2;
 
@@ -55,9 +54,3 @@ for i = 1 : reg
     % Computing the proyections
     Y(:,i) = P{i}*(out-mean(out));
 end
-
-
-
-
-
-
