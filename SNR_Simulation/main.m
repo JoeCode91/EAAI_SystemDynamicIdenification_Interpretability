@@ -41,7 +41,7 @@ for Sim=1:2 % The first simulation evaluate the performance of the Wiener
     M_Err_Tr_Proy = zeros(length(Sn),Forend,2);
     M_Err_Te_Fit = zeros(length(Sn),Forend,2);
     M_Err_Te_Proy = zeros(length(Sn),Forend,2);
-    M_Err_Te_Alp = zeros(length(Sn),Forend,2,2);
+    M_Err_Te_Alp = zeros(length(Sn),Forend,2);
     M_Ti_Te = zeros(length(Sn),Forend,2);
     
     for Cont=1:length(Sn) % External noise
@@ -191,14 +191,14 @@ for Sim=1:2 % The first simulation evaluate the performance of the Wiener
             M_Err_Te_Fit(Cont,Conti_te,1)=sum(abs(error))/(N*abs(max(y_n(m:end))-min(y_n(m:end))));
             % Calculate the error of each contribution by projections
             error = (y_nx(m:end,1)-mean(y_nx(m:end,1)))-(Ypn_proy(:,1)-mean(Ypn_proy(:,1)));
-            M_Err_Te_Proy(Cont,Conti_te,1,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,1))-min(y_nx(m:end,1))));
+            M_Err_Te_Proy(Cont,Conti_te,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,1))-min(y_nx(m:end,1))));
             error = (y_nx(m:end,2)-mean(y_nx(m:end,2)))-(Ypn_proy(:,2)-mean(Ypn_proy(:,1)));
-            M_Err_Te_Proy(Cont,Conti_te,2,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,2))-min(y_nx(m:end,2))));
+            M_Err_Te_Proy(Cont,Conti_te,2)=sum(abs(error))/(N*abs(max(y_nx(m:end,2))-min(y_nx(m:end,2))));
             % Calculate the error of each contribution by coefficients
             error = (y_nx(m:end,1)-mean(y_nx(m:end,1)))-(Ypn(:,1)-mean(Ypn(:,1)));
-            M_Err_Te_Alp(Cont,Conti_te,1,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,1))-min(y_nx(m:end,1))));
+            M_Err_Te_Alp(Cont,Conti_te,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,1))-min(y_nx(m:end,1))));
             error = (y_nx(m:end,2)-mean(y_nx(m:end,2)))-(Ypn(:,2)-mean(Ypn(:,1)));
-            M_Err_Te_Alp(Cont,Conti_te,2,1)=sum(abs(error))/(N*abs(max(y_nx(m:end,2))-min(y_nx(m:end,2))));
+            M_Err_Te_Alp(Cont,Conti_te,2)=sum(abs(error))/(N*abs(max(y_nx(m:end,2))-min(y_nx(m:end,2))));
         end
 
         disp('ERROR IN TEST:')
