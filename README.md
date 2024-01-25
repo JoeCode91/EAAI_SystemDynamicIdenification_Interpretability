@@ -1,8 +1,9 @@
 This repository corresponds to the simulations developed for the Journal Article 
 "Retrieving Interpretability to Support Vector Machine Regression Models in Dynamic 
-Systems Identification" Each file responds to a case proposed in the manuscript
+Systems Identification" Each folder responds to a case proposed in the manuscript, and 
+the software used is MATLAB R2022b.
 
-ABSTRACT
+ABSTRACT:
 Black-box models are commonly used to identify dynamic systems, however, due to its 
 nature, it is difficult to understand what the model actually does to the input data. 
 Therefore, interpretability of black-box models is recently gaining attention in the 
